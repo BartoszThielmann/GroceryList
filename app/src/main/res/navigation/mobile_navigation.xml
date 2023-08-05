@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_lists">
+
+    <fragment
+        android:id="@+id/navigation_lists"
+        android:name="com.bthielmann.grocerylist.ui.lists.ListsFragment"
+        android:label="@string/title_lists"
+        tools:layout="@layout/fragment_lists" />
+
+    <fragment
+        android:id="@+id/navigation_dishes"
+        android:name="com.bthielmann.grocerylist.ui.dishes.DishesFragment"
+        android:label="@string/title_dishes"
+        tools:layout="@layout/fragment_dishes" />
+
+</navigation>

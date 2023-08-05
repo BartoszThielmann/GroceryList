@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GroceryList</string>
+    <string name="title_lists">Lists</string>
+    <string name="title_dishes">Dishes</string>
+</resources>
