@@ -1,19 +1,15 @@
 package com.bthielmann.grocerylist.ui.dishes;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import android.app.Application;
+
 import androidx.lifecycle.ViewModel;
 
+import com.bthielmann.grocerylist.database.Datasource;
+
 public class DishesViewModel extends ViewModel {
+    public String[] carsData;
 
-    private final MutableLiveData<String> mText;
-
-    public DishesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dishes fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+    public DishesViewModel () {
+        carsData = Datasource.loadData();
     }
 }
