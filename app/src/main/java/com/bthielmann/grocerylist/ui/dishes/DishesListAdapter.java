@@ -5,44 +5,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bthielmann.grocerylist.R;
+import com.bthielmann.grocerylist.database.dishes.Dishes;
+
 
 // The RecyclerView requests views, and binds the views to their data,
 // by calling methods in the adapter.
+public class DishesListAdapter extends ListAdapter<Dishes, DishesListAdapter.ViewHolder> {
 
-public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.ViewHolder> {
-
-    private String[] localDataSet;
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder)
-     */
+    // Provide pool of views for the RecyclerView to use and reuse to display data
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-
             textView = (TextView) view.findViewById(R.id.textView);
         }
 
         public TextView getTextView() {
             return textView;
         }
+
+        public void bind(String text) {
+            textView.setText(text);
+        }
     }
 
-    /**
-     * Initialize the dataset of the Adapter
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView
-     */
-    public DishesListAdapter(String[] dataSet) {
-        localDataSet = dataSet;
+    public DishesListAdapter(@NonNull DiffUtil.ItemCallback<Dishes> diffCallback) {
+        super(diffCallback);
     }
 
     // Create new views (invoked by the layout manager)
@@ -57,16 +53,22 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet[position]);
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        Dishes current = getItem(position);
+        viewHolder.bind(current.getDishName());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return localDataSet.length;
+
+    static class WordDiff extends DiffUtil.ItemCallback<Dishes> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull Dishes oldItem, @NonNull Dishes newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Dishes oldItem, @NonNull Dishes newItem) {
+            return oldItem.getDishName().equals(newItem.getDishName());
+        }
     }
 }

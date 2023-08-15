@@ -34,11 +34,17 @@ public class DishesFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        DishesListAdapter dishesListAdapter = new DishesListAdapter(dishesViewModel.dishesData);
+        DishesListAdapter dishesListAdapter =
+                new DishesListAdapter(new DishesListAdapter.WordDiff());
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         // adapter instance is set to the recyclerview to inflate the items.
         recyclerView.setAdapter(dishesListAdapter);
+
+        dishesViewModel.getAllDishes().observe(getViewLifecycleOwner(), dishes -> {
+            // Update the cached copy of the words in the adapter.
+            dishesListAdapter.submitList(dishes);
+        });
     }
 
 
