@@ -24,5 +24,7 @@ public class DishesViewModel extends AndroidViewModel {
         return mAllDishes;
     }
 
-    // TODO: Implement method for insertion
+    void insertDish(Dishes dish) {
+        mRepository.insertDish(dish);
+    }
 }

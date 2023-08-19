@@ -17,8 +17,8 @@ public class Dishes {
     @ColumnInfo(name = "dish_name")
     private String mDishName;
 
-    public Dishes(int mId, @NonNull String mDishName) {
-        this.mId = mId;
+    public Dishes(@NonNull String mDishName) {
+        this.mId = 0;
         this.mDishName = mDishName;
     }
 

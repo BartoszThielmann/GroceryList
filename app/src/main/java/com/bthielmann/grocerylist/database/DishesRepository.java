@@ -28,11 +28,11 @@ public class DishesRepository {
         return mAllDishes;
     }
 
-    // TODO: Implement insertion into database
     // This must be called on a non-UI thread or the app will throw an exception. Room ensures
     // that the app is not doing any long running operations on the main thread, blocking the UI.
-//    void insert(Dishes dish) {
-//        DishesRoomDatabase.databaseWriteExecutor.execute(() -> {
-//            mDishesDao.insert(dish);
-//        });
+    public void insertDish(Dishes dish) {
+        DishesRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mDishesDao.insertDish(dish);
+        });
+    }
 }
