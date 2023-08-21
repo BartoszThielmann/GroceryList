@@ -3,7 +3,9 @@ package com.bthielmann.grocerylist.ui.dishes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -22,9 +24,10 @@ import com.bthielmann.grocerylist.database.dishes.Dishes;
 import com.bthielmann.grocerylist.databinding.FragmentDishesBinding;
 
 public class DishesFragment extends Fragment {
+    private static final String TAG = "DishesFragment";
     private FragmentDishesBinding binding;
     private DishesViewModel dishesViewModel;
-
+    RecyclerView recyclerView;
     ActivityResultLauncher<Intent> mGetContent;
 
     @Override
@@ -64,7 +67,7 @@ public class DishesFragment extends Fragment {
         DishesListAdapter dishesListAdapter =
                 new DishesListAdapter(new DishesListAdapter.WordDiff());
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView = view.findViewById(R.id.recyclerview);
         // adapter instance is set to the recyclerview to inflate the items.
         recyclerView.setAdapter(dishesListAdapter);
 
@@ -80,6 +83,29 @@ public class DishesFragment extends Fragment {
                 mGetContent.launch(intent);
             }
         });
+
+        registerForContextMenu(recyclerView);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int position = -1;
+        try {
+            position = ((DishesListAdapter) recyclerView.getAdapter()).getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        Log.v(TAG, "Selection in context menu on item: " + String.valueOf(position));
+        int itemId = item.getItemId();
+        if (itemId == R.id.option_edit) {
+            // do something if edit is chosen
+            return true;
+        } else if (itemId == R.id.option_delete) {
+            // do something if delete is chosen
+            return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
