@@ -15,4 +15,7 @@ public interface DishesDao {
     @Insert
     public void insertDish(Dishes dish);
 
+    @Query("DELETE FROM dishes_table WHERE dish_name = :dish_name")
+    public void deleteDish(String dish_name);
+
 }

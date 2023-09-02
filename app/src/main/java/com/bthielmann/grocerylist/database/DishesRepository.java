@@ -35,4 +35,10 @@ public class DishesRepository {
             mDishesDao.insertDish(dish);
         });
     }
+
+    public void deleteDish(String dish_name) {
+        DishesRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mDishesDao.deleteDish(dish_name);
+        });
+    }
 }
