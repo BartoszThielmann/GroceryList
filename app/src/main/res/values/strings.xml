@@ -5,4 +5,7 @@
     <string name="add_dish">Add new dish</string>
     <string name="save_button_text">Save</string>
     <string name="failed_to_save">Failed to save</string>
+    <string name="question_remove_dish">Are you sure you want to remove this dish?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>
