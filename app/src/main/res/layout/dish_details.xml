@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dish_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dish name:"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/dish_name"
+        tools:text="Some dish name taken from the database"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/ingredients_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Ingredients:"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        tools:text="Ingredients taken from the database"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/button_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="35dp"
+        android:text="Remove dish"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/save_button_text"
+        android:textColor="@color/black" />
+
+</LinearLayout>
