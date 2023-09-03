@@ -6,12 +6,16 @@ import androidx.lifecycle.LiveData;
 
 import com.bthielmann.grocerylist.database.dishes.Dishes;
 import com.bthielmann.grocerylist.database.dishes.DishesDao;
+import com.bthielmann.grocerylist.database.dishingredient.DishIngredientDao;
+import com.bthielmann.grocerylist.database.ingredients.Ingredient;
+import com.bthielmann.grocerylist.database.ingredients.IngredientDao;
 
 import java.util.List;
 
 public class DishesRepository {
 
     private DishesDao mDishesDao;
+    private DishIngredientDao mDishIngredientDao;
     private LiveData<List<Dishes>> mAllDishes;
 
     // Note that in order to unit test the DishesRepository,
@@ -20,6 +24,7 @@ public class DishesRepository {
         DishesRoomDatabase db = DishesRoomDatabase.getDatabase(application);
         mDishesDao = db.dishesDao();
         mAllDishes = mDishesDao.getAll();
+        mDishIngredientDao = db.dishIngredientDao();
     }
 
     // Room executes all queries on a separate thread.
@@ -40,5 +45,10 @@ public class DishesRepository {
         DishesRoomDatabase.databaseWriteExecutor.execute(() -> {
             mDishesDao.deleteDish(dish_name);
         });
+    }
+
+    public LiveData<List<Ingredient>> getIngredientsOfDish(String dish_name){
+        // return ingredients of requested dish
+        return mDishIngredientDao.getIngredientsOfDish(dish_name);
     }
 }

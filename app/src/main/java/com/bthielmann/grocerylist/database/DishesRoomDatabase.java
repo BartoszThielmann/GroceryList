@@ -8,14 +8,20 @@ import androidx.room.RoomDatabase;
 
 import com.bthielmann.grocerylist.database.dishes.Dishes;
 import com.bthielmann.grocerylist.database.dishes.DishesDao;
+import com.bthielmann.grocerylist.database.dishingredient.DishIngredient;
+import com.bthielmann.grocerylist.database.dishingredient.DishIngredientDao;
+import com.bthielmann.grocerylist.database.ingredients.Ingredient;
+import com.bthielmann.grocerylist.database.ingredients.IngredientDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Dishes.class}, version = 1, exportSchema = false)
+@Database(entities = {Dishes.class, Ingredient.class, DishIngredient.class},
+            version = 1, exportSchema = false)
 public abstract class DishesRoomDatabase extends RoomDatabase {
 
     public abstract DishesDao dishesDao();
+    public abstract DishIngredientDao dishIngredientDao();
 
     private static volatile DishesRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
